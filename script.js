@@ -28,3 +28,8 @@ const gameActions = (() => {
     };
     return {startGame, restartGame };
 })();
+
+const choices = (() => {
+    let totalChoices = [];
+    return { totalChoices };
+})();
