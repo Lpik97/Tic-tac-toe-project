@@ -92,3 +92,30 @@ const gameFunctions = (() => {
     };
     return { checkWinner };
 })();
+
+const aiMove = (() => {
+    function moveRandomly() {
+        if (gameStates.gameStarted) {
+            if (choices.totalChoices[choices.totalChoices.length - 1] === 'X') {
+                const emptyCells = Array.from(cells).filter(cell => cell.innerHTML === '');
+                if (emptyCells.length > 0) {
+                    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                    choices.totalChoices.push('O');
+                    randomCell.innerHTML = choices.totalChoices[choices.totalChoices.length - 1].toString();
+                    checkWinner();
+                };
+            };
+        };
+    };
+    function moveIntelligently() {
+        if (gameStates.gameStarted) {
+            if (choices.totalChoices[choices.totalChoices.length - 1] === 'X') {
+                const emptyCells = Array.from(cells).filter(cell => cell.innerHTML === '');
+                if (emptyCells.length > 0) {
+                    
+                };
+            };
+        };
+    };
+    return { moveRandomly, moveIntelligently };
+})();
