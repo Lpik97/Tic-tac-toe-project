@@ -1,17 +1,21 @@
 const cells = document.querySelectorAll('.cell');
 const form = document.querySelector('.names-form');
 const restartBtn = document.querySelector('.restart-btn');
-let gameStarted = false;
-let gameEnded = false;
+
+const gameStates = (() => {
+    let gameStarted = false;
+    let gameEnded = false;
+    return { gameStarted, gameEnded };
+})();
 
 const playerFactory = (name) => {
     return name.toString();
 };
 
-const gameActions = (() => {
+const gameEvents = (() => {
     function startGame (event) {
         event.preventDefault();
-        gameStarted = true;
+        gameStates.gameStarted = true;
         form.style.display= 'none';
         let playerName = playerFactory(document.getElementById('player-name').value);
         let opponentName = playerFactory(document.getElementById('opponent-name').value);
@@ -37,12 +41,54 @@ const choices = (() => {
 const renderChoice = (() => {
     cells.forEach((cell) => {
         cell.addEventListener('click', () => {
-            if (gameStarted && cell.innerHTML === '' ) {
+            if (gameStates.gameStarted && cell.innerHTML === '' ) {
                 choices.totalChoices.push('X');
                 cell.innerHTML = choices.totalChoices[choices.totalChoices.length - 1].toString();
             };
-            checkWinner();
+            gameFunctions.checkWinner();
             aiMove.moveRandomly();
         });
     });
+})();
+
+const gameFunctions = (() => {
+    const winningCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    function checkWinner() {
+        winningCombinations.some(combination => {
+            const [a, b, c] = combination;
+            const cellA = cells[a].innerHTML;
+            const cellB = cells[b].innerHTML;
+            const cellC = cells[c].innerHTML;
+
+            if (choices.totalChoices.length < 9) {
+                if (cellA === 'X' && cellB === 'X' && cellC === 'X') {
+                    gameStates.gameEnded = true;
+                    gameStates.gameStarted = false;
+                    window.alert('Congrats, you win.');
+                    return true;
+                } else if (cellA === 'O' && cellB === 'O' && cellC === 'O') {
+                    gameStates.gameEnded = true;
+                    gameStates.gameStarted = false;
+                    window.alert('The opponent wins, good luck next time.');
+                    return true;
+                };
+            } else {
+                gameStates.gameEnded = true;
+                gameStates.gameStarted = false;
+                window.alert('It\'s a tie.');
+                return true;
+            };
+        });
+    };
+    return { checkWinner };
 })();
