@@ -33,3 +33,16 @@ const choices = (() => {
     let totalChoices = [];
     return { totalChoices };
 })();
+
+const renderChoice = (() => {
+    cells.forEach((cell) => {
+        cell.addEventListener('click', () => {
+            if (gameStarted && cell.innerHTML === '' ) {
+                choices.totalChoices.push('X');
+                cell.innerHTML = choices.totalChoices[choices.totalChoices.length - 1].toString();
+            };
+            checkWinner();
+            aiMove.moveRandomly();
+        });
+    });
+})();
