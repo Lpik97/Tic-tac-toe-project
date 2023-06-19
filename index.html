@@ -22,5 +22,13 @@
         <div class="cell"></div>
         <div class="cell"></div>
     </div>
+    <form action="" class="names-form">
+        <label for="player-name">Player name</label>
+        <input type="text" name="" id="player-name" required>
+        <label for="opponent-name">Opponent name</label>
+        <input type="text" name="" id="opponent-name" required>
+        <button type="submit" id="start-btn" onclick="gameActions.startGame(event)">Start game</button>
+    </form>
+    <button class="restart-btn" onclick="gameActions.restartGame()">Restart game</button>
 </body>
 </html>
