@@ -29,3 +29,8 @@ h1 {
     font: 500 normal 1.5vw Arial;
     cursor: pointer;
 }
+
+.restart-btn {
+    display: none;
+    font: 500 normal 1.5vw Arial;
+}
