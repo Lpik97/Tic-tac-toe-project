@@ -7,3 +7,20 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+.game-board {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    width: 25vw;
+    height: 25vw;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(0, 0, 0);
+    font: 500 normal 1.5vw Arial;
+    cursor: pointer;
+}
